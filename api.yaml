@@ -1,0 +1,128 @@
+swagger: "2.0"
+info:
+  title: This is my SWAGGER
+  description: This is my documentation made by me
+  version: 1.0
+  contact:
+    email: kushal@mindgrep.com
+  liscence:
+    name: Apache 2.0
+    url: "http://apache.org/"
+  servers:
+    -url: "http://localhost:4000/"
+    description: This is my local server
+    -url: "http://company.com/"
+    description: This is my company server
+
+  
+schemes: [http,https]
+
+paths:
+#Return a JSON
+  /string:
+    get:
+      summary: Return a String
+      description: It is just returning a fake string.
+      responses:
+        200:
+          description: Success
+          schema:
+            type: string
+            example: "A fake string"
+        400:
+          description: User Error
+        500:
+          description: Internal Server Error
+
+
+#Return a Object
+  /user:
+    get:
+      summary: Return a String
+      description: It is just returning a fake string.
+      responses:
+        200:
+          description: Success
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+    
+#Returning Array of Users
+
+  /users:
+    get:
+      summary: Return Array of users
+      description: Array Return
+      responses:
+        200:
+          description: Success
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                 type: integer
+                name:
+                  type: string
+
+                  
+#Sending/Reading data through path
+  /users/{userId}:
+    get:
+      summary: Return Array of users
+      description: Array Return
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: array
+      responses:
+        200:
+          description: Success
+
+#Post json/body
+
+  # /create:
+  #   get:
+  #     summary: Return Array of users
+  #     description: Array Return
+  #     parameters:
+  #       - name: userId
+  #         in: path
+  #         required: true
+  #         schema:
+  #           type: array
+  #     responses:
+  #       200:
+  #         description: Success
+
+#Post json/body
+
+  /create:
+    post:
+      summary: Posting Data
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+      - in: body
+        name: user
+        schema:
+          type: object
+          properties:
+            id:
+              type: integer
+              required: true
+            name:
+              type: string
+      responses:
+        200:
+          description: OK
+                  
